@@ -1,95 +1,77 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+"use client";
 
+import {
+  Button,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Radio,
+  RadioGroup,
+  Typography,
+} from "@mui/material";
+import styles from "./page.module.css";
+import React from "react";
+import { useRouter } from "next/navigation";
+
+/**
+ * The Home page. Allows the user to configure the game.
+ */
 export default function Home() {
+  const [width, setWidth] = React.useState(7);
+  const [height, setHeight] = React.useState(6);
+
+  const router = useRouter();
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <main className={styles.root}>
+      <div className={styles.content}>
+        <Typography>Connect 4 Configruation</Typography>
+        <div className={styles.form}>
+          <FormControl>
+            <FormLabel>Width</FormLabel>
+            <RadioGroup
+              value={width}
+              onChange={(e) => {
+                setWidth(parseInt(e.target.value));
+              }}
+            >
+              <FormControlLabel value={5} control={<Radio />} label="5" />
+              <FormControlLabel value={6} control={<Radio />} label="6" />
+              <FormControlLabel value={7} control={<Radio />} label="7" />
+              <FormControlLabel value={8} control={<Radio />} label="8" />
+              <FormControlLabel value={9} control={<Radio />} label="9" />
+            </RadioGroup>
+          </FormControl>
+          <FormControl>
+            <FormLabel>Height</FormLabel>
+            <RadioGroup
+              value={height}
+              onChange={(e) => {
+                setHeight(parseInt(e.target.value));
+              }}
+            >
+              <FormControlLabel value={4} control={<Radio />} label="4" />
+              <FormControlLabel value={5} control={<Radio />} label="5" />
+              <FormControlLabel value={6} control={<Radio />} label="6" />
+              <FormControlLabel value={7} control={<Radio />} label="7" />
+              <FormControlLabel value={8} control={<Radio />} label="8" />
+            </RadioGroup>
+          </FormControl>
         </div>
-      </div>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+        <Button
+          variant="contained"
+          onClick={() => {
+            const search_params = new URLSearchParams();
+            search_params.set("width", width.toString());
+            search_params.set("height", height.toString());
 
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
+            router.push(`/game?${search_params.toString()}`);
+          }}
         >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+          Start
+        </Button>
       </div>
     </main>
-  )
+  );
 }

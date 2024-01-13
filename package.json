@@ -3,22 +3,35 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "vitest"
   },
   "dependencies": {
+    "@emotion/cache": "^11.11.0",
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.15.4",
+    "@mui/material": "^5.15.4",
+    "@mui/material-nextjs": "^5.15.3",
+    "lodash": "^4.17.21",
+    "next": "14.0.4",
     "react": "^18",
-    "react-dom": "^18",
-    "next": "14.0.4"
+    "react-dom": "^18"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@testing-library/react": "^14.1.2",
+    "@types/lodash": "^4.14.202",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@vitejs/plugin-react": "^4.2.1",
     "eslint": "^8",
-    "eslint-config-next": "14.0.4"
+    "eslint-config-next": "14.0.4",
+    "jsdom": "^23.2.0",
+    "typescript": "^5",
+    "vitest": "^1.2.0"
   }
 }
